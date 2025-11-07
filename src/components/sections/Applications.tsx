@@ -79,65 +79,65 @@ export function Applications() {
       {/* Ejemplos de Aplicación */}
       <div>
         <h3 className="text-slate-900 mb-6">Ejemplos de Aplicación</h3>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {/* Placa */}
           <div className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
-            <div className="relative h-96 overflow-hidden bg-slate-50 flex items-center justify-center">
+            <div className="relative h-64 sm:h-80 lg:h-96 overflow-hidden bg-slate-50 flex items-center justify-center">
               <img
                 src={placaImg}
                 alt="Placa institucional"
                 className="h-full w-auto object-contain"
               />
             </div>
-            <p className="text-sm text-slate-500 p-4 text-center font-medium">Placa institucional</p>
+            <p className="text-xs sm:text-sm text-slate-500 p-3 sm:p-4 text-center font-medium">Placa institucional</p>
           </div>
 
           {/* Medalla */}
           <div className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
-            <div className="relative h-96 overflow-hidden bg-slate-50 flex items-center justify-center">
+            <div className="relative h-64 sm:h-80 lg:h-96 overflow-hidden bg-slate-50 flex items-center justify-center">
               <img
                 src={medallaImg}
                 alt="Medalla conmemorativa"
                 className="h-full w-auto object-contain"
               />
             </div>
-            <p className="text-sm text-slate-500 p-4 text-center font-medium">Medalla conmemorativa</p>
+            <p className="text-xs sm:text-sm text-slate-500 p-3 sm:p-4 text-center font-medium">Medalla conmemorativa</p>
           </div>
 
           {/* Bandera */}
-          <div className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm lg:col-span-2">
-            <div className="relative h-screen max-h-screen lg:h-96 overflow-hidden bg-slate-50 flex items-center justify-center">
+          <div className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm sm:col-span-2 lg:col-span-2">
+            <div className="relative h-80 sm:h-96 lg:h-96 overflow-hidden bg-slate-50 flex items-center justify-center">
               <img
                 src={banderaImg}
                 alt="Bandera ceremonial"
                 className="h-full w-auto object-contain"
               />
             </div>
-            <p className="text-sm text-slate-500 p-4 text-center font-medium">Bandera ceremonial</p>
+            <p className="text-xs sm:text-sm text-slate-500 p-3 sm:p-4 text-center font-medium">Bandera ceremonial</p>
           </div>
 
           {/* Papelería */}
           <div className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
-            <div className="relative h-96 overflow-hidden bg-white flex items-center justify-center">
+            <div className="relative h-64 sm:h-80 lg:h-96 overflow-hidden bg-white flex items-center justify-center">
               <img
                 src={papeleriaImg}
                 alt="Papelería oficial"
                 className="h-full w-auto object-contain"
               />
             </div>
-            <p className="text-sm text-slate-500 p-4 text-center font-medium">Papelería oficial</p>
+            <p className="text-xs sm:text-sm text-slate-500 p-3 sm:p-4 text-center font-medium">Papelería oficial</p>
           </div>
 
           {/* Diploma */}
           <div className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
-            <div className="relative h-96 overflow-hidden bg-white flex items-center justify-center">
+            <div className="relative h-64 sm:h-80 lg:h-96 overflow-hidden bg-white flex items-center justify-center">
               <img
                 src={diplomaImg}
                 alt="Diploma certificado"
                 className="h-full w-auto object-contain"
               />
             </div>
-            <p className="text-sm text-slate-500 p-4 text-center font-medium">Diploma y certificados</p>
+            <p className="text-xs sm:text-sm text-slate-500 p-3 sm:p-4 text-center font-medium">Diploma y certificados</p>
           </div>
         </div>
       </div>

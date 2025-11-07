@@ -51,68 +51,68 @@ export function ColorPalette() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {colors.map((color) => (
           <div key={color.hex} className="border border-slate-200 rounded-lg overflow-hidden">
-            <div 
-              className="h-32 relative"
+            <div
+              className="h-24 sm:h-32 relative"
               style={{ backgroundColor: color.hex }}
             >
               {color.hex === "#FFFFFF" && (
                 <div className="absolute inset-0 border-2 border-slate-200" />
               )}
             </div>
-            <div className="p-4 space-y-3">
-              <h3 className="text-slate-900">{color.name}</h3>
-              
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-600">HEX</span>
+            <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
+              <h3 className="text-slate-900 text-sm sm:text-base font-semibold">{color.name}</h3>
+
+              <div className="space-y-1.5 sm:space-y-2">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="text-xs sm:text-sm text-slate-600">HEX</span>
                   <button
                     onClick={() => copyToClipboard(color.hex)}
-                    className="flex items-center gap-2 px-2 py-1 rounded hover:bg-slate-100 transition-colors"
+                    className="flex items-center gap-1 sm:gap-2 px-2 py-0.5 sm:py-1 rounded hover:bg-slate-100 transition-colors text-xs sm:text-sm"
                   >
-                    <code className="text-sm">{color.hex}</code>
+                    <code className="text-xs sm:text-sm truncate">{color.hex}</code>
                     {copiedColor === color.hex ? (
-                      <Check className="w-4 h-4 text-green-500" />
+                      <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
                     ) : (
-                      <Copy className="w-4 h-4 text-slate-400" />
+                      <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400 flex-shrink-0" />
                     )}
                   </button>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-600">RGB</span>
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="text-xs sm:text-sm text-slate-600">RGB</span>
                   <button
                     onClick={() => copyToClipboard(color.rgb)}
-                    className="flex items-center gap-2 px-2 py-1 rounded hover:bg-slate-100 transition-colors"
+                    className="flex items-center gap-1 sm:gap-2 px-2 py-0.5 sm:py-1 rounded hover:bg-slate-100 transition-colors text-xs sm:text-sm"
                   >
-                    <code className="text-sm">{color.rgb}</code>
+                    <code className="text-xs sm:text-sm truncate">{color.rgb}</code>
                     {copiedColor === color.rgb ? (
-                      <Check className="w-4 h-4 text-green-500" />
+                      <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
                     ) : (
-                      <Copy className="w-4 h-4 text-slate-400" />
+                      <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400 flex-shrink-0" />
                     )}
                   </button>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-600">CMYK</span>
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="text-xs sm:text-sm text-slate-600">CMYK</span>
                   <button
                     onClick={() => copyToClipboard(color.cmyk)}
-                    className="flex items-center gap-2 px-2 py-1 rounded hover:bg-slate-100 transition-colors"
+                    className="flex items-center gap-1 sm:gap-2 px-2 py-0.5 sm:py-1 rounded hover:bg-slate-100 transition-colors text-xs sm:text-sm"
                   >
-                    <code className="text-sm">{color.cmyk}</code>
+                    <code className="text-xs sm:text-sm truncate">{color.cmyk}</code>
                     {copiedColor === color.cmyk ? (
-                      <Check className="w-4 h-4 text-green-500" />
+                      <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
                     ) : (
-                      <Copy className="w-4 h-4 text-slate-400" />
+                      <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400 flex-shrink-0" />
                     )}
                   </button>
                 </div>
               </div>
 
-              <p className="text-sm text-slate-600 pt-2 border-t border-slate-200">
+              <p className="text-xs sm:text-sm text-slate-600 pt-2 sm:pt-3 border-t border-slate-200">
                 {color.usage}
               </p>
             </div>
