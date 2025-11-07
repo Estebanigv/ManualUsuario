@@ -52,6 +52,7 @@
       "devDependencies": {
             "@types/node": "^20.10.0",
             "@vitejs/plugin-react-swc": "^3.10.2",
+            "esbuild": "^0.25.12",
             "vite": "6.3.5"
       },
       "scripts": {
