@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { LogoPresentation } from "./sections/LogoPresentation";
 import { LogoVariations } from "./sections/LogoVariations";
 import { ClearSpace } from "./sections/ClearSpace";
@@ -27,7 +27,7 @@ export function BrandManual() {
   const mainContentRef = useRef<HTMLDivElement>(null);
 
   // Detectar cambios de tamaño de pantalla
-  React.useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
     };
