@@ -1,4 +1,4 @@
-import logoImage from "figma:asset/e09bdf9d6bc17c600bb1508e9eae8fbf5a7aa0e5.png";
+import logoImage from "../../assets/e09bdf9d6bc17c600bb1508e9eae8fbf5a7aa0e5.png";
 
 export function LogoPresentation() {
   return (
