@@ -7,7 +7,6 @@ import { ColorPalette } from "./sections/ColorPalette";
 import { Typography } from "./sections/Typography";
 import { Applications } from "./sections/Applications";
 import { ChevronRight, BookOpen, Download, Loader } from "lucide-react";
-import { generatePDFHTML } from "./PDFExport";
 
 const sections = [
   { id: "presentation", title: "Presentación", component: LogoPresentation },
@@ -110,11 +109,18 @@ export function BrandManual() {
       // Esperar a que todo se renderice
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Usar el contenedor creado como origen de impresión
-      const printWindow = window.open('', '', 'width=800,height=600');
-      if (!printWindow) {
+      // Usar técnica de iframe en lugar de popup
+      const iframe = document.createElement('iframe');
+      iframe.style.position = 'absolute';
+      iframe.style.left = '-9999px';
+      iframe.style.width = '0';
+      iframe.style.height = '0';
+      document.body.appendChild(iframe);
+
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (!iframeDoc) {
         document.body.removeChild(printContainer);
-        alert("Por favor habilita las ventanas emergentes");
+        document.body.removeChild(iframe);
         setIsGeneratingPDF(false);
         return;
       }
@@ -142,20 +148,21 @@ export function BrandManual() {
         </html>
       `;
 
-      printWindow.document.write(htmlContent);
-      printWindow.document.close();
+      iframeDoc.open();
+      iframeDoc.write(htmlContent);
+      iframeDoc.close();
 
       // Esperar a que cargue Tailwind y llamar a imprimir
       setTimeout(() => {
-        printWindow.print();
+        iframe.contentWindow?.print();
         setTimeout(() => {
           document.body.removeChild(printContainer);
+          document.body.removeChild(iframe);
           setIsGeneratingPDF(false);
         }, 500);
       }, 3000);
     } catch (error) {
       console.error("Error:", error);
-      alert("Error al preparar el documento");
       setIsGeneratingPDF(false);
     }
   };
@@ -173,24 +180,17 @@ export function BrandManual() {
                 <p className="text-xs sm:text-sm text-slate-600 truncate">Respétable Logia Estrella de Chile</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-3">
               <button
                 onClick={downloadPresentation}
                 disabled={isGeneratingPDF}
-                className="flex items-center gap-1 sm:gap-2 bg-slate-900 text-white px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-md hover:bg-slate-800 transition-colors text-xs sm:text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                title={isGeneratingPDF ? "Generando PDF..." : "Descargar Manual en PDF"}
+                className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-700 hover:text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isGeneratingPDF ? (
-                  <>
-                    <Loader className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin flex-shrink-0" />
-                    <span className="hidden sm:inline">Generando PDF...</span>
-                    <span className="sm:hidden">PDF...</span>
-                  </>
+                  <Loader className="w-5 h-5 animate-spin" />
                 ) : (
-                  <>
-                    <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                    <span className="hidden xs:inline">Descargar PDF</span>
-                    <span className="xs:hidden">PDF</span>
-                  </>
+                  <Download className="w-5 h-5" />
                 )}
               </button>
               <div className="text-xs sm:text-sm text-slate-500 whitespace-nowrap">
