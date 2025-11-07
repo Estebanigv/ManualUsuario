@@ -214,12 +214,51 @@ export function BrandManual() {
         </div>
       </header>
 
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 top-16 bg-black/20 z-30" onClick={() => setIsMobileMenuOpen(false)} />
+      )}
+
+      {/* Mobile Menu Drawer */}
+      <div
+        className={`lg:hidden fixed left-0 right-0 top-16 bg-white border-b border-slate-200 shadow-lg transition-all duration-300 ease-in-out z-40 ${
+          isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="p-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <h2 className="text-sm font-semibold text-slate-900 mb-3">Contenido</h2>
+          <ul className="space-y-1">
+            {sections.map((section) => (
+              <li key={section.id}>
+                <button
+                  onClick={() => {
+                    setActiveSection(section.id);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-md transition-colors flex items-center justify-between group text-sm ${
+                    activeSection === section.id
+                      ? "bg-slate-900 text-white"
+                      : "text-slate-700 hover:bg-slate-100"
+                  }`}
+                >
+                  <span>{section.title}</span>
+                  <ChevronRight
+                    className={`w-4 h-4 transition-transform flex-shrink-0 ml-2 ${
+                      activeSection === section.id ? "text-white" : "text-slate-400 group-hover:text-slate-600"
+                    }`}
+                  />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
       <div ref={mainContentRef} className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-8">
-          {/* Sidebar Navigation - Desktop y Mobile Drawer */}
-          <nav className="lg:col-span-1">
-            {/* Versión Desktop - siempre visible */}
-            <div className="hidden lg:block bg-white rounded-lg shadow-sm border border-slate-200 p-3 sm:p-4 sticky top-20 sm:top-24">
+          {/* Sidebar Navigation - Solo Desktop */}
+          <nav className="hidden lg:block lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-3 sm:p-4 sticky top-20 sm:top-24">
               <h2 className="text-sm sm:text-base font-semibold text-slate-900 mb-3 sm:mb-4">Contenido</h2>
               <ul className="space-y-0.5 sm:space-y-1">
                 {sections.map((section) => (
@@ -242,44 +281,6 @@ export function BrandManual() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Versión Mobile - menú desplegable */}
-            {isMobileMenuOpen && (
-              <div className="lg:hidden fixed inset-0 top-16 bg-black/20 z-40" onClick={() => setIsMobileMenuOpen(false)} />
-            )}
-            <div
-              className={`lg:hidden fixed left-0 right-0 top-16 bg-white border-b border-slate-200 shadow-lg transition-all duration-300 ease-in-out z-40 ${
-                isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
-              }`}
-            >
-              <div className="p-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
-                <h2 className="text-sm font-semibold text-slate-900 mb-3">Contenido</h2>
-                <ul className="space-y-1">
-                  {sections.map((section) => (
-                    <li key={section.id}>
-                      <button
-                        onClick={() => {
-                          setActiveSection(section.id);
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className={`w-full text-left px-3 py-2 rounded-md transition-colors flex items-center justify-between group text-sm ${
-                          activeSection === section.id
-                            ? "bg-slate-900 text-white"
-                            : "text-slate-700 hover:bg-slate-100"
-                        }`}
-                      >
-                        <span>{section.title}</span>
-                        <ChevronRight
-                          className={`w-4 h-4 transition-transform flex-shrink-0 ml-2 ${
-                            activeSection === section.id ? "text-white" : "text-slate-400 group-hover:text-slate-600"
-                          }`}
-                        />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
           </nav>
 
