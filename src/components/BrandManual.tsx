@@ -22,8 +22,18 @@ export function BrandManual() {
   const [activeSection, setActiveSection] = useState("presentation");
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
   const contentRef = useRef<HTMLDivElement>(null);
   const mainContentRef = useRef<HTMLDivElement>(null);
+
+  // Detectar cambios de tamaño de pantalla
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const ActiveComponent = sections.find((s) => s.id === activeSection)?.component || LogoPresentation;
 
@@ -255,10 +265,10 @@ export function BrandManual() {
       </div>
 
       <div ref={mainContentRef} className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
-        <div className="flex flex-col lg:grid lg:grid-cols-4 gap-4 sm:gap-8">
-          {/* Sidebar Navigation - Solo Desktop (React condicional) */}
-          {typeof window !== 'undefined' && window.innerWidth >= 1024 && (
-            <nav className="lg:col-span-1">
+        <div className={isDesktop ? "grid grid-cols-4 gap-8" : "flex flex-col gap-4"}>
+          {/* Sidebar Navigation - Solo Desktop */}
+          {isDesktop && (
+            <nav className="col-span-1">
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-3 sm:p-4 sticky top-20 sm:top-24">
                 <h2 className="text-sm sm:text-base font-semibold text-slate-900 mb-3 sm:mb-4">Contenido</h2>
                 <ul className="space-y-0.5 sm:space-y-1">
@@ -287,7 +297,7 @@ export function BrandManual() {
           )}
 
           {/* Main Content */}
-          <main className="lg:col-span-3 w-full">
+          <main className={isDesktop ? "col-span-3" : "w-full"}>
             <div ref={contentRef} data-section-content className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6 md:p-8">
               <ActiveComponent />
             </div>
