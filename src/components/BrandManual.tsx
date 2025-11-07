@@ -255,37 +255,39 @@ export function BrandManual() {
       </div>
 
       <div ref={mainContentRef} className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-8">
-          {/* Sidebar Navigation - Solo Desktop */}
-          <nav className="hidden lg:block lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-3 sm:p-4 sticky top-20 sm:top-24">
-              <h2 className="text-sm sm:text-base font-semibold text-slate-900 mb-3 sm:mb-4">Contenido</h2>
-              <ul className="space-y-0.5 sm:space-y-1">
-                {sections.map((section) => (
-                  <li key={section.id}>
-                    <button
-                      onClick={() => setActiveSection(section.id)}
-                      className={`w-full text-left px-2 sm:px-3 py-1.5 sm:py-2 rounded-md transition-colors flex items-center justify-between group text-xs sm:text-sm ${
-                        activeSection === section.id
-                          ? "bg-slate-900 text-white"
-                          : "text-slate-700 hover:bg-slate-100"
-                      }`}
-                    >
-                      <span className="truncate">{section.title}</span>
-                      <ChevronRight
-                        className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform flex-shrink-0 ml-1 ${
-                          activeSection === section.id ? "text-white" : "text-slate-400 group-hover:text-slate-600"
+        <div className="flex flex-col lg:grid lg:grid-cols-4 gap-4 sm:gap-8">
+          {/* Sidebar Navigation - Solo Desktop (React condicional) */}
+          {typeof window !== 'undefined' && window.innerWidth >= 1024 && (
+            <nav className="lg:col-span-1">
+              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-3 sm:p-4 sticky top-20 sm:top-24">
+                <h2 className="text-sm sm:text-base font-semibold text-slate-900 mb-3 sm:mb-4">Contenido</h2>
+                <ul className="space-y-0.5 sm:space-y-1">
+                  {sections.map((section) => (
+                    <li key={section.id}>
+                      <button
+                        onClick={() => setActiveSection(section.id)}
+                        className={`w-full text-left px-2 sm:px-3 py-1.5 sm:py-2 rounded-md transition-colors flex items-center justify-between group text-xs sm:text-sm ${
+                          activeSection === section.id
+                            ? "bg-slate-900 text-white"
+                            : "text-slate-700 hover:bg-slate-100"
                         }`}
-                      />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </nav>
+                      >
+                        <span className="truncate">{section.title}</span>
+                        <ChevronRight
+                          className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform flex-shrink-0 ml-1 ${
+                            activeSection === section.id ? "text-white" : "text-slate-400 group-hover:text-slate-600"
+                          }`}
+                        />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </nav>
+          )}
 
           {/* Main Content */}
-          <main className="lg:col-span-3">
+          <main className="lg:col-span-3 w-full">
             <div ref={contentRef} data-section-content className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6 md:p-8">
               <ActiveComponent />
             </div>
